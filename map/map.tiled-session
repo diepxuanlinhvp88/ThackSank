@@ -1,0 +1,128 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "New folder/mapp.tmx",
+    "expandedProjectPaths": [
+        ".",
+        "New folder"
+    ],
+    "fileStates": {
+        "New folder/1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "New folder/10.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "New folder/11.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "New folder/12.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "New folder/13.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "New folder/14.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "New folder/2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "New folder/3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "New folder/4.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "New folder/5.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "New folder/6.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "New folder/7.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 4
+        },
+        "New folder/8.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1.5
+        },
+        "New folder/9.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "New folder/mapp.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1094,
+                "y": 836
+            }
+        },
+        "New folder/untitled.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1424.3333333333333,
+                "y": 1065.3333333333333
+            }
+        }
+    },
+    "last.imagePath": "D:/visua/thacksank/map",
+    "map.height": 60,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 120,
+    "openFiles": [
+        "New folder/mapp.tmx",
+        "New folder/1.tsx",
+        "New folder/2.tsx",
+        "New folder/3.tsx",
+        "New folder/4.tsx",
+        "New folder/5.tsx",
+        "New folder/6.tsx",
+        "New folder/7.tsx",
+        "New folder/8.tsx",
+        "New folder/9.tsx",
+        "New folder/10.tsx",
+        "New folder/11.tsx",
+        "New folder/12.tsx",
+        "New folder/13.tsx",
+        "New folder/14.tsx"
+    ],
+    "project": "map.tiled-project",
+    "recentFiles": [
+        "New folder/14.tsx",
+        "New folder/13.tsx",
+        "New folder/12.tsx",
+        "New folder/11.tsx",
+        "New folder/10.tsx",
+        "New folder/9.tsx",
+        "New folder/8.tsx",
+        "New folder/7.tsx",
+        "New folder/6.tsx",
+        "New folder/5.tsx",
+        "New folder/4.tsx",
+        "New folder/3.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
