@@ -1,2 +1,5 @@
-﻿  Map.cpp
+﻿  Game.cpp
+  Map.cpp
+  Player.cpp
+  Generating Code...
   contra.vcxproj -> D:\visua\thacksank\contra\x64\Debug\contra.exe

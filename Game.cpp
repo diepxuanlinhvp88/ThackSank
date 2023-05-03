@@ -3,6 +3,7 @@
 #include"Texture.h"
 #include"Player.h"
 #include"Map.h"
+#include"Bullet.h"
 
 
 
@@ -12,6 +13,7 @@ SDL_Event Game::event;
 Player* player;
 Player* player2;
 Map* map;
+
 
 Game::Game()
 {
@@ -48,9 +50,12 @@ void Game::Init(const char* name, int x_pos, int y_pos, int width, int height, b
 		background = Texture::Load_Texture("img/background.png", gRenderer);
 		map = new Map();
 		map->LoadMap(gRenderer);		
-		player = new Player(gRenderer, 100, 100, 2);
+		player = new Player(gRenderer, 100, 100, 4);
 		player2 = new Player(gRenderer, 100, 100, 2);
+		
 		player->CreateClip();
+		player2->CreateClip();
+		
 	}
 }
 
@@ -65,6 +70,7 @@ void Game::HandleEvent()
 		else {
 			player->move();
 			player2->move_2();
+			
 
 
 		}
@@ -75,9 +81,14 @@ void Game::HandleEvent()
 
 void Game::Update()
 {
+	
+	
 	player->check();
-	player->Update();
-	player2->Update2();
+	player2->check2();
+	
+	
+	
+	
 	
 }
 
@@ -88,6 +99,7 @@ void Game::render()
 	map->DrawMap(gRenderer);
 	player->Render();
 	player2->Render2();	
+	
 	SDL_RenderPresent(gRenderer);
 
 }

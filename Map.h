@@ -15,8 +15,9 @@ public:
 	SDL_Texture* tex2;
 	SDL_Texture* tex11;
 	SDL_Texture* tex10;
-int arr[60][120];
-SDL_Rect dRect;
+	int arr[60][120];
+	SDL_Rect dRect;
+	static int m[60][120];
 	
 	
 private:

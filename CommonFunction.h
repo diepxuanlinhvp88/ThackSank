@@ -11,11 +11,13 @@
 #include<vector>
 #include<ctime>
 #include<fstream>
-using namespace std;
+
 
 
 	static SDL_Window* gWindow;
 	static SDL_Renderer* gRenderer;
+
+	static int PLAYER_WIDTH = 64;
 	
 
 	

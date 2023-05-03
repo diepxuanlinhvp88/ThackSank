@@ -2,7 +2,7 @@
 #ifndef Game_H
 #define Game_H
 #include"CommonFunction.h"
-using namespace std;
+
 
 class Game
 {

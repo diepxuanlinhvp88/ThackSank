@@ -4,13 +4,14 @@
 #include"Game.h"
 
 
-ifstream file("map.txt");
-
+std::ifstream file("map.txt");
+int Map::m[60][120];
 
 Map::Map()
 {
 	dRect.w = dRect.h = 16;
 	arr[60][120] = 0;
+	m[60][120] = 0;
 	
 	
 	
@@ -26,6 +27,7 @@ void Map::LoadMap(SDL_Renderer* Ren)
 		for (int j = 0; j < 120; j++)
 		{
 			file >> arr[i][j];
+			m[i][j] = arr[i][j];
 			
 		}
 	tex14 = Texture::Load_Texture("map/14.png", Ren);
@@ -41,7 +43,7 @@ void Map:: DrawMap(SDL_Renderer* Renderer)
 		for (int j = 0; j < 120; j++)
 		{
 			dRect.x = 16 * j;
-			dRect.y = 16 * i - 100;
+			dRect.y = 16 * i;
 
 			int type = arr[i][j];
 			switch (type)
@@ -50,7 +52,7 @@ void Map:: DrawMap(SDL_Renderer* Renderer)
 				
 				SDL_RenderCopy(Renderer, tex14, NULL, &dRect);
 				break;
-				cout << 29;
+				
 			case 28:
 				SDL_RenderCopy(Renderer, tex13, NULL, &dRect);
 				break;
