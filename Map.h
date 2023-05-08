@@ -10,14 +10,28 @@ public:
 	void LoadMap(SDL_Renderer* Ren);
 	void DrawMap(SDL_Renderer* Renderer);
 	
-	SDL_Texture* tex14;
-	SDL_Texture* tex13;
+	SDL_Texture* tex1;
 	SDL_Texture* tex2;
-	SDL_Texture* tex11;
+	SDL_Texture* tex3;	
+	SDL_Texture* tex4;
+
+	SDL_Texture* tex6;
+
+	SDL_Texture* tex8;
+	SDL_Texture* tex9;
 	SDL_Texture* tex10;
-	int arr[60][120];
+	SDL_Texture* tex11;
+	SDL_Texture* tex12;
+	
+	
+	SDL_Texture* tex17;
+	SDL_Texture* tex18;
+	SDL_Texture* tex19;
+	
+	int arr[25][40];
 	SDL_Rect dRect;
-	static int m[60][120];
+	
+	static int m[25][40];
 	
 	
 private:

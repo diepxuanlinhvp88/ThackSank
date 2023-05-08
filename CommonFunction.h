@@ -6,7 +6,7 @@
 #include<SDL_image.h>
 #include<SDL_mixer.h>
 #include<SDL_ttf.h>
-#include<cstring>
+#include<string>
 #include<Windows.h>
 #include<vector>
 #include<ctime>
@@ -18,6 +18,8 @@
 	static SDL_Renderer* gRenderer;
 
 	static int PLAYER_WIDTH = 64;
+
+	
 	
 
 	

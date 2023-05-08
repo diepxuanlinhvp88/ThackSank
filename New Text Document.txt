@@ -1,0 +1,9 @@
+tuyết rơi
+cây rung
+nhân vật lùi 
+khi bắn trúng , nhân vật tiến 
+level
+rơi nhân vật,
+ttf
+âm thanh
+nhặt quà, x2

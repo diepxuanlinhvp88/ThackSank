@@ -2,35 +2,57 @@
 #include"Player.h"
 #include"Texture.h"
 #include"Game.h"
-
+#include"Map.h"
 Bullet::Bullet()
 {
+	srand(time(NULL));
 	
+	bul.w = 16;
+	bul.h = 16;
+	getposbul.w = bul.w;
+	getposbul.h = bul.h;
 	
-	
-	bullet.w = bullet.h = 16;
+
+	getposbul2.w = bul.w;
+	getposbul2.h = bul.h;
 	isAttack = false;
 }
 
 Bullet::~Bullet()
 {
 }
-void Bullet::loadBullet()
+void Bullet::loadBullet(int id,SDL_Renderer* Renderer)
 {
-	bulletTex = Texture::Load_Texture("img/bullet/1.png", Renderer);
+	switch (id)
+	{
+	case 1:
+		bulletTex = Texture::Load_Texture("img/bullet/1.png", Renderer);
+		break;
+	case 2:
+		bulletTex = Texture::Load_Texture("img/bullet/2.png", Renderer);
+		break;
+	}
 }
-void Bullet::Update(int x, int y)
+void Bullet::Update()
 {
 	
 	
+	xpos += dir * speed;
+	bul.x = xpos + 50;
+	getposbul.x = bul.x - 45;
+	getposbul2.x = bul.x + 45;
+	bul.y = ypos + 3;
+	getposbul.y = bul.y;
+	getposbul2.y = bul.y;
 	
 }
 bool Bullet::attack(int x, int y)
 {
-	
+		
 	return isAttack;
 }
 void Bullet::Render(SDL_Renderer* Renderer)
 {
-	SDL_RenderCopyEx(Renderer, bulletTex, NULL, &bullet,0,NULL,SDL_FLIP_NONE);
+	SDL_RenderCopyEx(Renderer, bulletTex, NULL, &bul,0,NULL,SDL_FLIP_NONE);
+	
 }
