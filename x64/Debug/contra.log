@@ -1,8 +1,2 @@
-﻿  Bullet.cpp
-D:\visua\thacksank\contra\Bullet.cpp(8,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Game.cpp
-D:\visua\thacksank\contra\Game.cpp(31,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Map.cpp
-  Player.cpp
-  Generating Code...
+﻿  main.cpp
   contra.vcxproj -> D:\visua\thacksank\contra\x64\Debug\contra.exe

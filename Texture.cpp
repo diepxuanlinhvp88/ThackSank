@@ -21,6 +21,12 @@ SDL_Texture* Texture::Load_TextureID(int ID, SDL_Renderer* Renderer)
 	case 2:
 		texture = "img/bullet/2.png";
 		break;
+	case 3:
+		texture = "img/live/1.png";
+		break;
+	case 4:
+		texture = "img/live/2.png";
+		break;
 	}
 	SDL_Surface* tmpSurface = IMG_Load(texture);
 	SDL_Texture* tmpTex;
@@ -29,16 +35,9 @@ SDL_Texture* Texture::Load_TextureID(int ID, SDL_Renderer* Renderer)
 	return tmpTex;
 
 }
-SDL_Texture* Texture::Live_Texture(SDL_Renderer* Renderer,const char* font, int lives, int size)
-{
-	TTF_Font* Font = TTF_OpenFont(font, size);
-	SDL_Color texColor = { 255, 255, 255 };
-	SDL_Surface* livesSuaface = TTF_RenderText_Solid(Font, "hello"/*std::to_string(lives).c_str()*/, texColor);
-	SDL_Texture* livetex = SDL_CreateTextureFromSurface(Renderer, livesSuaface);
-	SDL_FreeSurface(livesSuaface);
-	SDL_DestroyTexture(livetex);
-	TTF_CloseFont(Font);
-	
-	return livetex;
-}
+//SDL_Texture* Texture::Live_Texture(SDL_Renderer* Renderer,const char* font, int lives, int size)
+//{
+//	
+//	
+//}
 

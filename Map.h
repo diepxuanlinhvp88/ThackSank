@@ -9,6 +9,7 @@ public:
 	~Map();
 	void LoadMap(SDL_Renderer* Ren);
 	void DrawMap(SDL_Renderer* Renderer);
+	void CloseMap();
 	
 	SDL_Texture* tex1;
 	SDL_Texture* tex2;

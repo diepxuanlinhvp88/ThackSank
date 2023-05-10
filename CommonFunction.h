@@ -14,8 +14,9 @@
 
 
 
-	static SDL_Window* gWindow;
-	static SDL_Renderer* gRenderer;
+
+static SDL_Window* gWindow;
+static SDL_Renderer* gRenderer;
 
 	static int PLAYER_WIDTH = 64;
 

@@ -42,7 +42,11 @@ public:
 	int max_jump = 2;
 	bool onground;
 	bool onground2;
+	int live = 3;
+	int live2 = 4;
+	SDL_Texture* livetex(int size, SDL_Renderer* Ren,int live);
 	
+
 
 private:
 
@@ -59,11 +63,11 @@ private:
 	SDL_Texture* playerJump;
 	SDL_Texture* playerStop;
 	SDL_Texture* playerAttack;
-	SDL_Texture* lives;
+	
 	bool jump;
 	bool run;
 	bool stop;
-	int live = 3;
+	
 
 	
 
@@ -72,14 +76,13 @@ private:
 	SDL_Texture* playerJump2;
 	SDL_Texture* playerStop2;
 	SDL_Texture* playerAttack2;
-	SDL_Texture* lives2;
+	
 	bool jump2;
 	bool run2;
 	bool stop2;
 	int frame_width2 = 69;
 	int frame_height2 = 56;
 	int frame2 = 0;
-	int live2 = 4;
 
 	
 	

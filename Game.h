@@ -11,15 +11,24 @@ public:
 	Game();
 	~Game();
 	void Init(const char* name, int x_pos, int y_pos, int width, int height, bool fullsceen);
-	
+	void Mix();
 	void HandleEvent();
 	void Update();
 	void render();
 	void close();
 	bool running() { return isRunning; }
-
+	 SDL_Renderer* mRenderer;
 	SDL_Texture* playerTex;
 	SDL_Texture* background;
+	SDL_Texture* liveTex;
+	SDL_Texture* liveTex2;
+	SDL_Texture* liveTex_bg;
+	SDL_Texture* liveTex_bg2;
+	SDL_Rect TexRect = {95,42,28,28};
+	SDL_Rect TexRect2 = { 1131,42,28,28 };
+	SDL_Rect Tex_bgRect = { 30,0,180,81 };
+	SDL_Rect Tex_bgRect2 = { 1066,0,180,81 };
+	Mix_Music* music;
 	struct Snow
 	{
 		SDL_Texture* snowTex;

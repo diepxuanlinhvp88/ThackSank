@@ -11,7 +11,7 @@ Map::Map()
 {
 	dRect.w = dRect.h = 32;
 	
-	arr[25][40] = 0;
+	arr[26][40] = 0;
 	m[25][40] = 0;
 	
 	
@@ -119,3 +119,19 @@ void Map:: DrawMap(SDL_Renderer* Renderer)
 		}
 }
 
+void Map::CloseMap()
+{
+	SDL_DestroyTexture(tex1);
+	SDL_DestroyTexture(tex2);
+	SDL_DestroyTexture(tex3);
+	SDL_DestroyTexture(tex4);
+	SDL_DestroyTexture(tex6);
+	SDL_DestroyTexture(tex8);
+	SDL_DestroyTexture(tex9);
+	SDL_DestroyTexture(tex10);
+	SDL_DestroyTexture(tex11);
+	SDL_DestroyTexture(tex12);
+	SDL_DestroyTexture(tex17);
+	SDL_DestroyTexture(tex18);
+	SDL_DestroyTexture(tex19);
+}

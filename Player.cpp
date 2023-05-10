@@ -39,22 +39,22 @@ Player::Player(SDL_Renderer* Renderer)
 	playerRun = Texture::Load_Texture("img/player/playerRun.png", Renderer);
 	playerJump = Texture::Load_Texture("img/player/playerJump.png", Renderer);
 	playerAttack = Texture::Load_Texture("img/player/playerAttack.png", Renderer);
-	lives = Texture::Live_Texture(Renderer, "ttf/ARIALN.TTF", live, 28);
+	
 	playerBox.x = 605;
 	playerBox.y = 96;
-	playerBox.w = 56;
-	playerBox.h = 48;
+	playerBox.w = 75;
+	playerBox.h = 64;
 	
 	playerStop2 = Texture::Load_Texture("img/player/playerStop2.png", Renderer);
 	playerRun2 = Texture::Load_Texture("img/player/playerRun2.png", Renderer);
 	playerJump2 = Texture::Load_Texture("img/player/playerJump2.png", Renderer);
 	playerAttack2 = Texture::Load_Texture("img/player/playerAttack2.png", Renderer);
-	lives2 = Texture::Live_Texture(Renderer, "ttf/ARIALN.TTF", live2, 28);
+	
 	playerBox2.x = Game::SCEEN_WIDTH - 650;
 	playerBox2.y = 96;
-	playerBox2.w = 60;
+	playerBox2.w = 80;
 	
-	playerBox2.h = 48;
+	playerBox2.h = 64;
 	
 	
 
@@ -89,6 +89,18 @@ void Player::CreateClip2()
 
 	}
 
+}
+SDL_Texture* Player::livetex(int size, SDL_Renderer* Ren, int live)
+{
+	TTF_Font* Font = TTF_OpenFont("ttf/ARIALNB.TTF", 28);
+	SDL_Color texColor = { 204,0,1 };
+	SDL_Surface* livessuaface = TTF_RenderText_Solid(Font, std::to_string(live).c_str(), texColor);
+	SDL_Texture* livetex;
+	livetex	= SDL_CreateTextureFromSurface(Ren, livessuaface);
+	
+	SDL_FreeSurface(livessuaface);
+	TTF_CloseFont(Font);
+	return livetex;
 }
 void Player::Update()
 {
@@ -324,9 +336,11 @@ void Player::check()
 		playerBox.y -= veloc_y;
 		veloc_y -= val;
 	}
-	if (playerBox.y > Game::SCEEN_HEIGHT) {
+	if (playerBox.y > Game::SCEEN_HEIGHT + 10) {
 		playerBox.y = -playerBox.h;
 		playerBox.x = 605;
+		live--;
+		
 	}
 	if (veloc_x < 0) {
 		flips = SDL_FLIP_HORIZONTAL;
@@ -391,9 +405,10 @@ void Player::check2()
 		playerBox2.y -= veloc_y2;
 		veloc_y2 -= val;
 	}
-	if (playerBox2.y > Game::SCEEN_HEIGHT) {
+	if (playerBox2.y > Game::SCEEN_HEIGHT + 10) {
 		playerBox2.y = -playerBox2.h;
 		playerBox2.x = 605;
+		live2--;
 	}
 
 	if (veloc_x2 < 0) {
@@ -475,7 +490,7 @@ void Player::Render()
 	}
 	
 	
-	SDL_RenderCopy(playerRenderer, lives, NULL, &playerBox);
+	
 
 }
 
