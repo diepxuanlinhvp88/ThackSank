@@ -7,8 +7,8 @@ Bullet::Bullet()
 {
 	srand(time(NULL));
 	
-	bul.w = 16;
-	bul.h = 16;
+	bul.w = 8;
+	bul.h = 8;
 	getposbul.w = bul.w;
 	getposbul.h = bul.h;
 	
@@ -36,14 +36,16 @@ void Bullet::loadBullet(int id,SDL_Renderer* Renderer)
 void Bullet::Update()
 {
 	
+	if (dir != 0) {
+		xpos += dir * speed;
+	}
 	
-	xpos += dir * speed;
 	bul.x = xpos + 50;
 	getposbul.x = bul.x - 45;
-	getposbul2.x = bul.x + 45;
+	getposbul2.x = bul.x - 40;
 	bul.y = ypos + 3;
 	getposbul.y = bul.y;
-	getposbul2.y = bul.y;
+	getposbul2.y = bul.y  + 15;
 	
 }
 bool Bullet::attack(int x, int y)

@@ -13,6 +13,7 @@
 SDL_Event Game::event;
 Player* player;
 Player* player2;
+
 Map* map;
 std::vector<Bullet> bullets;
 Bullet bullet;
@@ -69,12 +70,13 @@ void Game::Init(const char* name, int x_pos, int y_pos, int width, int height, b
 		
 		
 		isRunning = true;		
-		background = Texture::Load_Texture("img/4plus.png", gRenderer);
+		background = Texture::Load_Texture("img/background1024x576.png", gRenderer);
 		map = new Map();
 		map->LoadMap(gRenderer);
 		
 		player = new Player(gRenderer);
-		player2 = new Player(gRenderer);		
+		player2 = new Player(gRenderer);	
+	
 		bullet.loadBullet(1,gRenderer);
 		bullet2.loadBullet(2,gRenderer);
 		snow.snowTex = Texture::Load_Texture("img/snow.png", gRenderer);		
@@ -99,6 +101,7 @@ void Game::Mix()
 	// Phát âm thanh vô hạn lần
 	Mix_PlayMusic(music, -1);
 }
+
 void Game::HandleEvent()
 {
 
@@ -111,7 +114,7 @@ void Game::HandleEvent()
 			
 			
 			
-			if (player->attack && player->frame_attack == 4) {
+			if (player->attack && player->bul) {
 				bullet.xpos = player->playerBox.x;
 				bullet.ypos = player->playerBox.y;
 				bullet.dir = player->dir;
@@ -119,9 +122,9 @@ void Game::HandleEvent()
 				
 			}
 
-			if (player2->attack2 && player2->frame_attack2 == 7) {
-				bullet2.xpos = player2->playerBox2.x - 50;
-				bullet2.ypos = player2->playerBox2.y + 15;
+			if (player2->attack2 && player2->bul2) {
+				bullet2.xpos = player2->playerBox2.x ;
+				bullet2.ypos = player2->playerBox2.y;
 				bullet2.dir = player2->dir2;
 				bullets2.push_back(bullet2);
 
@@ -137,43 +140,63 @@ void Game::HandleEvent()
 
 void Game::Update()
 {
+	gamelive = player->live;
+	gamelive2 = player2->live2;
 	
-	
-	player->check();
+	player->check();	
+	player->Update();
 	player2->check2();
-	
+
 	liveTex = player->livetex(28, gRenderer, player->live);
 	liveTex2 = player->livetex(28, gRenderer, player2->live2);
-	snow.x = rand() % 1280;	
+	if (player->attack && player->bul) {
+		player->bul--;
+	
+	}
+	if (player2->attack2 && player2->bul2) {
+		player2->bul2--;
+
+	}
+	nowTime = SDL_GetTicks();
+	nowTime2 = SDL_GetTicks();
+	if (nowTime - lastTime > 5000 && player->bul <= 0)
+	{
+		player->bul = 25;
+		lastTime = nowTime;
+	}
+	if (nowTime2 - lastTime2 > 5000 && player2->bul2 <= 0)
+	{
+		player2->bul2 = 25;
+		lastTime2 = nowTime2;
+	}
+	
+	bulTex = player->livetex(28, gRenderer, player->bul);
+	bulTex2 = player->livetex(28, gRenderer, player2->bul2);
+	snow.x = rand() % 1280;
 	snow.size = rand() % 10 + 1;
 	snow.speed = rand() % 5 + 1;
 	snow.y = rand() % 100 + 1;
 	Snows.push_back(snow);
-		
+
 	for (int i = 0; i < Snows.size(); i++)
 	{
 		Snows[i].y += Snows[i].speed;
-		if (Snows[i].y  >= Game::SCEEN_HEIGHT)
+		if (Snows[i].y >= Game::SCEEN_HEIGHT)
 		{
 			Snows.erase(Snows.begin() + i);
-			}
+		}
 	}
 	for (int i = 0; i < bullets.size(); i++) {
 
-			bullets[i].Update();
-			
-			if (SDL_HasIntersection(&player2->playerBox2, &bullets[i].getposbul))
-			{
-				bullets.erase(bullets.begin() + i);
-				player2->playerBox2.x += 20;
-				std::cout << "cham" << std::endl;
-
-
-			}
-			
-			
+		bullets[i].Update();
+		if (SDL_HasIntersection(&player2->playerBox2, &bullets[i].getposbul))
+		{
+			bullets.erase(bullets.begin() + i);
+			player2->playerBox2.x += bullet.dir * val_lui;
+			std::cout << "cham" << std::endl;
 		}
-		
+	}
+	
 		
 	for (int i = 0; i < bullets2.size(); i++) {
 
@@ -181,7 +204,7 @@ void Game::Update()
 			if (SDL_HasIntersection(&player->playerBox, &bullets2[i].getposbul2))
 			{
 				bullets2.erase(bullets2.begin() + i);
-				player->playerBox.x -= 20;
+				player->playerBox.x += bullet2.dir * val_lui;
 				std::cout << "cham2" << std::endl;
 
 
@@ -223,7 +246,11 @@ void Game::render()
 		SDL_DestroyTexture(liveTex);
 		SDL_RenderCopy(gRenderer, liveTex2, NULL, &TexRect2);
 		SDL_DestroyTexture(liveTex2);
-	SDL_RenderPresent(gRenderer);
+		SDL_RenderCopy(gRenderer, bulTex, NULL, &bulRect);
+		SDL_DestroyTexture(bulTex);
+		SDL_RenderCopy(gRenderer, bulTex2, NULL, &bulRect2);
+		SDL_DestroyTexture(bulTex2);
+		SDL_RenderPresent(gRenderer);
 
 }
 

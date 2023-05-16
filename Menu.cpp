@@ -3,18 +3,20 @@
 
 Menu::Menu()
 {
+	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
 }
 Menu::~Menu()
 {
 }
 bool Menu::isMouseHovering(int mouseX, int mouseY, int textX, int textY, int textWidth, int textHeight) {
-	return (mouseX > textX && mouseX < (textX + textWidth) &&
-		mouseY > textY && mouseY < (textY + textHeight));
+	return (mouseX >= textX && mouseX <= (textX + textWidth) &&
+		mouseY >= textY && mouseY <= (textY + textHeight));
 }
 void Menu::HandleEvent()
 {
 	while (SDL_PollEvent(&e) != 0) {
+		if(e.type == SDL_QUIT ) SDL_Quit();
 		if (e.type == SDL_MOUSEBUTTONDOWN) {
 			if (e.button.button == SDL_BUTTON_LEFT) {
 				
@@ -23,8 +25,21 @@ void Menu::HandleEvent()
 				if (isMouseHovering(mouseX, mouseY, playRect.x, playRect.y, playRect.w, playRect.h))
 				{
 					
-					std::cout << "play11";
+					
 					Gametype = PLAY;
+					Mix_Chunk* playmix = Mix_LoadWAV("mix/play.mp3");
+					Mix_PlayChannel(1, playmix, 0);
+					Mix_HaltMusic();
+				}
+				else if (isMouseHovering(mouseX, mouseY, tutuRect.x, tutuRect.y, tutuRect.w, tutuRect.h))
+				{
+					Gametype = TUTURIAL;
+					Mix_Chunk* tutumix = Mix_LoadWAV("mix/foom_0.wav");
+					Mix_PlayChannel(1, tutumix, 0);
+					
+					
+				
+					
 				}
 				else if(isMouseHovering(mouseX, mouseY, exitRect.x, exitRect.y, exitRect.w, exitRect.h))
 				{
@@ -96,6 +111,7 @@ void Menu::Render()
 	SDL_RenderCopy(Ren,playTex, NULL, &playRect);
 	SDL_RenderCopy(Ren, tutuTex, NULL, &tutuRect);
 	SDL_RenderCopy(Ren, exitTex, NULL, &exitRect);
+
 	SDL_DestroyTexture(bgnTex);
 	SDL_DestroyTexture(playTex);
 	SDL_DestroyTexture(tutuTex);

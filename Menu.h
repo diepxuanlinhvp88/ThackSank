@@ -30,6 +30,8 @@ public:
 	SDL_Rect tutuRect = { 640,510,100,30 };
 	SDL_Texture* exitTex;
 	SDL_Rect exitRect = { 640,571,80,30 };
+
+
 	SDL_Texture* tex(SDL_Renderer* Renderer, const char* name,int size, SDL_Color texColor);
 	void Render();
 	void close();

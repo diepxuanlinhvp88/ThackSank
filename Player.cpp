@@ -19,8 +19,11 @@ int scale2 = 3;
 
 Player::Player(SDL_Renderer* Renderer)
 {
+	srand(time(NULL));
+	git = { 600,-15,32,32 };
 	dir = 1;
-	onground = true;
+	//gits.push_back(git);
+	onground = false;
 	jump = false;
 	stop = false;	
 	run = false;	
@@ -33,24 +36,24 @@ Player::Player(SDL_Renderer* Renderer)
 	attack2 = false;
 
 	
-
+	gitTex[0] = Texture::Load_Texture("img/bullet/live.png", Renderer);
 	playerRenderer = Renderer;
 	playerStop = Texture::Load_Texture("img/player/playerStop.png", Renderer);
 	playerRun = Texture::Load_Texture("img/player/playerRun.png", Renderer);
 	playerJump = Texture::Load_Texture("img/player/playerJump.png", Renderer);
 	playerAttack = Texture::Load_Texture("img/player/playerAttack.png", Renderer);
 	
-	playerBox.x = 605;
+	playerBox.x = 350;
 	playerBox.y = 96;
-	playerBox.w = 75;
-	playerBox.h = 64;
+	playerBox.w = 70;
+	playerBox.h = 56;
 	
 	playerStop2 = Texture::Load_Texture("img/player/playerStop2.png", Renderer);
 	playerRun2 = Texture::Load_Texture("img/player/playerRun2.png", Renderer);
 	playerJump2 = Texture::Load_Texture("img/player/playerJump2.png", Renderer);
 	playerAttack2 = Texture::Load_Texture("img/player/playerAttack2.png", Renderer);
 	
-	playerBox2.x = Game::SCEEN_WIDTH - 650;
+	playerBox2.x = Game::SCEEN_WIDTH - 350;
 	playerBox2.y = 96;
 	playerBox2.w = 80;
 	
@@ -104,7 +107,37 @@ SDL_Texture* Player::livetex(int size, SDL_Renderer* Ren, int live)
 }
 void Player::Update()
 {
-		
+	nowTime = SDL_GetTicks();
+	if (SDL_GetTicks() - lastTime > 20000) {
+		git_cnt = 0;
+		lastTime = nowTime;
+	}
+
+	if (git_cnt < 1)
+	{
+		gits.push_back(git);
+		git_cnt = 1;
+	}
+	for (int i = 0; i < gits.size(); i++) {
+		gits[i].y += valgit;
+
+		if (toMap(gits[i]))
+		{
+			valgit = 0;
+
+
+		}
+		if (SDL_HasIntersection(&playerBox, &gits[i]) || SDL_HasIntersection(&playerBox2, &gits[i]))
+		{
+			live++;
+			gits.erase(gits.begin() + i);
+			SDL_GetTicks();
+			lastTime = SDL_GetTicks();
+
+			valgit = 1;
+		}
+
+	}
 	
 }
 void Player::Update2()
@@ -112,133 +145,6 @@ void Player::Update2()
 	
 }
 	
-void Player::move()
-{
-	
-	if (Game::event.type == SDL_KEYDOWN && Game::event.key.repeat == 0)
-	{
-
-
-		switch (Game::event.key.keysym.sym)
-		{
-		case SDLK_a:
-			veloc_x -= val;					
-			
-			break;
-		case SDLK_d:
-			veloc_x += val;				
-			
-			break;
-		case SDLK_w:
-			if (onground && jump_cnt <= max_jump) {
-				veloc_y = val_jump;
-				
-				//jump_cnt++;
-				
-				
-				
-			}
-			break;
-		case SDLK_v:
-			if (!attack)
-				attack = true;
-
-			break;
-			
-		}
-	
-		
-
-
-	}
-	
-	
-
-	
-	else if(Game::event.type == SDL_KEYUP)
-	{
-
-		switch (Game::event.key.keysym.sym)
-		{
-		case SDLK_a:
-			veloc_x += val;			
-			break;
-		case SDLK_d:
-			veloc_x -= val;			
-			break;
-		
-		case SDLK_v:
-			
-				attack = false;
-			
-			break;
-		
-		
-		}
-		
-	}
-}
-
-
-
-
-void Player::move_2()
-{
-	if (Game::event.type == SDL_KEYDOWN && Game::event.key.repeat ==0)
-	{
-		switch (Game::event.key.keysym.sym)
-		{
-		case SDLK_j:
-			veloc_x2 -= val;
-			
-			
-			break;
-		case SDLK_l:
-			veloc_x2 += val;			
-			break;
-		case SDLK_i:
-			if (onground2 && jump_cnt <= max_jump) {
-							
-				veloc_y2 = val_jump;
-			}
-			break;
-		case SDLK_b:
-			if (!attack2)
-				attack2 = true;
-
-			break;
-
-		
-		}
-
-	}
-
-
-	else if (Game::event.type == SDL_KEYUP&& Game:: event.key.repeat == 0)
-	{
-
-		switch (Game::event.key.keysym.sym)
-		{
-		case SDLK_j:
-			veloc_x2 += val;
-			
-			
-			break;
-		case SDLK_l:
-			veloc_x2 -= val;
-			
-			break;
-		case SDLK_b:
-			
-				attack2 = false;
-
-			break;
-					
-		
-		}
-
-	}
-}
 bool Player::checkcollision(SDL_Rect a, SDL_Rect b)
 {
 
@@ -273,12 +179,12 @@ bool Player::checkcollision(SDL_Rect a, SDL_Rect b)
 		return false;
 	}
 
-	if (rightA <= leftB+18)
+	if (rightA <= leftB + 24)
 	{
 		return false;
 	}
 
-	if (leftA >= rightB-18)
+	if (leftA >= rightB - 24)
 	{
 		return false;
 	}
@@ -288,15 +194,16 @@ bool Player::checkcollision(SDL_Rect a, SDL_Rect b)
 }
 bool Player::toMap(SDL_Rect playerbox)
 {
-	for (int i = 0; i < 25; i++) {
-		for (int j = 0; j < 40; j++)
+	for (int i = 0; i < 20; i++) {
+		for (int j = 0; j < 30; j++)
 		{
-			desRect.x = 32 * j;
-			desRect.y = 32 * i+2;
+			desRect.x = 32 * j + 120;
+			desRect.y = 32 * i + 80;
 			desRect.w = desRect.h = 32;
 			if (Map::m[i][j] != 0)
 			{
-				if (checkcollision(playerbox, desRect)) {
+			
+				if (checkcollision(playerbox, desRect)) {					
 					return true;
 				}
 			}
@@ -305,41 +212,164 @@ bool Player::toMap(SDL_Rect playerbox)
 	return false;
 }
 
+void Player::move()
+{
+	
+	if (Game::event.type == SDL_KEYDOWN && Game::event.key.repeat == 0)
+	{
+
+
+		switch (Game::event.key.keysym.sym)
+		{
+		case SDLK_a:
+			
+			veloc_x -= val;
+			break;
+		case SDLK_d:
+			veloc_x += val;
+			break;
+		case SDLK_w:
+			
+			if (jump_cnt > 0) {
+				veloc_y = -val_jump;
+				jump_cnt--;
+			}
+			break;
+		case SDLK_b:
+			if (!attack)
+				attack = true;
+
+			break;
+			
+		}
+	
+		
+
+
+	}
+	
+	
 
 	
+	else if(Game::event.type == SDL_KEYUP)
+	{
+
+		switch (Game::event.key.keysym.sym)
+		{
+		case SDLK_a:
+			veloc_x += val;
+			break;
+		case SDLK_d:
+			veloc_x -= val;			
+			break;
+		
+		case SDLK_b:
+			
+				attack = false;
+			
+			break;
+		
+		
+		}
+		
+	}
+}
+
+
+
+
+void Player::move_2()
+{
+	if (Game::event.type == SDL_KEYDOWN && Game::event.key.repeat ==0)
+	{
+		switch (Game::event.key.keysym.sym)
+		{
+		case SDLK_LEFT:
+			veloc_x2 -= val;			
+			break;
+		case SDLK_RIGHT:
+			veloc_x2 += val;			
+			break;
+		case SDLK_UP:
+		
+			if(jump_cnt2 > 0)
+				veloc_y2 = -val_jump;
+				jump_cnt2--;
+			break;
+		case SDLK_p:
+			if (!attack2)
+				attack2 = true;
+
+			break;
+
+		
+		}
+
+	}
+
+
+	else if (Game::event.type == SDL_KEYUP&& Game:: event.key.repeat == 0)
+	{
+
+		switch (Game::event.key.keysym.sym)
+		{
+		case SDLK_LEFT:
+			veloc_x2 += val;
+			
+			
+			break;
+		case SDLK_RIGHT:
+			veloc_x2 -= val;
+			
+			break;
+		case SDLK_p:
+			
+				attack2 = false;
+
+			break;
+					
+		
+		}
+
+	}
+}
+
+
+
 
 void Player::check()
 {
-	
-	getplayerBox=
-	{	playerBox.x,
-		playerBox.y -(playerBox.h - val_jump - 40),
-		playerBox.w,
-		playerBox.h
 
-	};
-	veloc_y += val;
-	if (veloc_y >= val) veloc_y = val;
-	if (toMap(getplayerBox)) {
-		onground = false;
-	}
-	else onground = true;
+
+
+
+
+
+	veloc_y += 1;
+
 	playerBox.x += veloc_x;
 	if (toMap(playerBox))
 	{
 		playerBox.x -= veloc_x;
-		
 	}
+	
+	
+
 	playerBox.y += veloc_y;
 	if (toMap(playerBox))
 	{
 		playerBox.y -= veloc_y;
-		veloc_y -= val;
+		veloc_y = 0;
+		jump_cnt = 3;
 	}
+	
+
+	
 	if (playerBox.y > Game::SCEEN_HEIGHT + 10) {
 		playerBox.y = -playerBox.h;
 		playerBox.x = 605;
 		live--;
+		veloc_y = 0;
 		
 	}
 	if (veloc_x < 0) {
@@ -380,19 +410,8 @@ void Player::check()
 void Player::check2()
 {
 
-	veloc_y2 += val;
-	if (veloc_y2 >= val) veloc_y2 = val;
-	getplayerBox2 =
-	{	playerBox2.x,
-		playerBox2.y - (playerBox2.h - val_jump - 40),
-		playerBox2.w,
-		playerBox2.h
-
-	};
-	if (toMap(getplayerBox2)) {
-		onground2 = false;
-	}
-	else onground2 = true;
+	veloc_y2 += 1;	
+	
 	playerBox2.x += veloc_x2;
 	if (toMap(playerBox2))
 	{
@@ -403,12 +422,15 @@ void Player::check2()
 	if (toMap(playerBox2))
 	{
 		playerBox2.y -= veloc_y2;
-		veloc_y2 -= val;
+		veloc_y2 = 0;
+		jump_cnt2 = 3;
 	}
+	
 	if (playerBox2.y > Game::SCEEN_HEIGHT + 10) {
 		playerBox2.y = -playerBox2.h;
 		playerBox2.x = 605;
 		live2--;
+		
 	}
 
 	if (veloc_x2 < 0) {
@@ -488,7 +510,9 @@ void Player::Render()
 		}
 		
 	}
-	
+	for (int i = 0; i < gits.size(); i++) {
+		SDL_RenderCopy(playerRenderer, gitTex[0], NULL, &gits[i]);
+	}
 	
 	
 

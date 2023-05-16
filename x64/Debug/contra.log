@@ -1,2 +1,3 @@
-﻿  main.cpp
+﻿  Game.cpp
+D:\visua\thacksank\contra\Game.cpp(32,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   contra.vcxproj -> D:\visua\thacksank\contra\x64\Debug\contra.exe

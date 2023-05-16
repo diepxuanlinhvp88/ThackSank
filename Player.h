@@ -3,7 +3,10 @@
 class Player
 {
 public:
-	
+	SDL_Rect git;
+	std::vector<SDL_Rect>gits;
+	SDL_Texture* gitTex[5];
+	double valgit = 2;
 	Player(SDL_Renderer* Renderer);
 	~Player();
 	void CreateClip();
@@ -17,10 +20,11 @@ public:
 	void move_2();
 	bool checkcollision(SDL_Rect a, SDL_Rect b);
 	bool toMap(SDL_Rect playerbox);
+
 	void check();
 	void check2();
 	int veloc_x = 0;
-	int veloc_y = 0;
+	float veloc_y = 0;
 	int veloc_x2 = 0;
 	int veloc_y2 = 0;
 	int val = 5;
@@ -29,25 +33,30 @@ public:
 	SDL_Rect frame_clip[8];
 	SDL_Rect frame_clip2[16];
 	SDL_Rect desRect;
-	SDL_Rect getplayerBox;
-	SDL_Rect getplayerBox2;
+	
+	
+
+	
 	bool attack;
 	bool attack2;
 	static int dir;
 	static int dir2;
 	int frame_attack;
 	int frame_attack2;
-	int jump_cnt = 0;
-	int jump_cnt2 = 0;
+	int jump_cnt = 3;
+	int jump_cnt2 = 3;
 	int max_jump = 2;
 	bool onground;
 	bool onground2;
 	int live = 3;
-	int live2 = 4;
+	int live2 = 3;
+	int bul = 25;
+	int bul2 = 25;
 	SDL_Texture* livetex(int size, SDL_Renderer* Ren,int live);
 	
-
-
+	int git_cnt = 0;
+	Uint32 lastTime = 0;
+	Uint32 nowTime = 0;
 private:
 
 	
@@ -55,7 +64,7 @@ private:
 	int frame_width = 98;
 	int frame_height = 84;
 	int frame = 0;
-	int val_jump = -20;
+	int val_jump = 15;
 	
 
 	SDL_RendererFlip flips;
