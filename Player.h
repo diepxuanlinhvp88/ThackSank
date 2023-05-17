@@ -3,9 +3,7 @@
 class Player
 {
 public:
-	SDL_Rect git;
-	std::vector<SDL_Rect>gits;
-	SDL_Texture* gitTex[5];
+	
 	double valgit = 2;
 	Player(SDL_Renderer* Renderer);
 	~Player();
@@ -54,7 +52,7 @@ public:
 	int bul2 = 25;
 	SDL_Texture* livetex(int size, SDL_Renderer* Ren,int live);
 	
-	int git_cnt = 0;
+	
 	Uint32 lastTime = 0;
 	Uint32 nowTime = 0;
 private:

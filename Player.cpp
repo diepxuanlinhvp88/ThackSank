@@ -20,7 +20,7 @@ int scale2 = 3;
 Player::Player(SDL_Renderer* Renderer)
 {
 	srand(time(NULL));
-	git = { 600,-15,32,32 };
+	
 	dir = 1;
 	//gits.push_back(git);
 	onground = false;
@@ -36,7 +36,7 @@ Player::Player(SDL_Renderer* Renderer)
 	attack2 = false;
 
 	
-	gitTex[0] = Texture::Load_Texture("img/bullet/live.png", Renderer);
+	
 	playerRenderer = Renderer;
 	playerStop = Texture::Load_Texture("img/player/playerStop.png", Renderer);
 	playerRun = Texture::Load_Texture("img/player/playerRun.png", Renderer);
@@ -107,37 +107,6 @@ SDL_Texture* Player::livetex(int size, SDL_Renderer* Ren, int live)
 }
 void Player::Update()
 {
-	nowTime = SDL_GetTicks();
-	if (SDL_GetTicks() - lastTime > 20000) {
-		git_cnt = 0;
-		lastTime = nowTime;
-	}
-
-	if (git_cnt < 1)
-	{
-		gits.push_back(git);
-		git_cnt = 1;
-	}
-	for (int i = 0; i < gits.size(); i++) {
-		gits[i].y += valgit;
-
-		if (toMap(gits[i]))
-		{
-			valgit = 0;
-
-
-		}
-		if (SDL_HasIntersection(&playerBox, &gits[i]) || SDL_HasIntersection(&playerBox2, &gits[i]))
-		{
-			live++;
-			gits.erase(gits.begin() + i);
-			SDL_GetTicks();
-			lastTime = SDL_GetTicks();
-
-			valgit = 1;
-		}
-
-	}
 	
 }
 void Player::Update2()
@@ -509,9 +478,6 @@ void Player::Render()
 			
 		}
 		
-	}
-	for (int i = 0; i < gits.size(); i++) {
-		SDL_RenderCopy(playerRenderer, gitTex[0], NULL, &gits[i]);
 	}
 	
 	

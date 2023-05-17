@@ -143,21 +143,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Fall.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CommonFunction.h" />
-    <ClInclude Include="Fall.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Map.h" />
-    <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Texture.h" />
   </ItemGroup>

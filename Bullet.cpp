@@ -40,9 +40,9 @@ void Bullet::Update()
 		xpos += dir * speed;
 	}
 	
-	bul.x = xpos + 50;
-	getposbul.x = bul.x - 45;
-	getposbul2.x = bul.x - 40;
+	bul.x = xpos ;
+	getposbul.x = bul.x +5;
+	getposbul2.x = bul.x +10;
 	bul.y = ypos + 3;
 	getposbul.y = bul.y;
 	getposbul2.y = bul.y  + 15;

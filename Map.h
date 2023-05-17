@@ -7,7 +7,7 @@ class Map
 public:
 	Map();
 	~Map();
-	void LoadMap(SDL_Renderer* Ren);
+	void LoadMap(int ID, SDL_Renderer* Ren);
 	void DrawMap(SDL_Renderer* Renderer);
 	void CloseMap();
 	
@@ -15,7 +15,7 @@ public:
 	SDL_Texture* tex2;
 	SDL_Texture* tex3;	
 	SDL_Texture* tex4;
-
+	SDL_Texture* tex5;
 	SDL_Texture* tex6;
 
 	SDL_Texture* tex8;

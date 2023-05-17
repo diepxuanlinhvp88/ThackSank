@@ -4,8 +4,7 @@
 #include"Game.h"
 
 
-std::ifstream file("map/map4/level1.txt");
-std::ifstream file2("map/map5/map.txt");
+
 int Map::m[20][30];
 
 Map::Map()
@@ -15,7 +14,7 @@ Map::Map()
 	arr[20][30] = 0;
 	m[20][30] = 0;
 	
-	
+
 	
 }
 
@@ -23,68 +22,67 @@ Map::~Map()
 {
 }
 
-void Map::LoadMap(SDL_Renderer* Ren)
-{	
+void Map::LoadMap(int ID,SDL_Renderer* Ren)
+{
+	
+	std::ifstream file("map/map" + std::to_string(ID) + "/map.txt");
+	if (file.is_open()) 
 	for (int i = 0; i < 20; i++)
 		for (int j = 0; j < 30; j++)
 		{
-			file2 >> arr[i][j];
+			file >> arr[i][j];
 			
 			m[i][j] = arr[i][j];
 			
 		}
 	
-	tex1 = Texture::Load_Texture("map/map4/2.png", Ren);
-	tex2 = Texture::Load_Texture("map/map4/5.png", Ren);
-	tex3 = Texture::Load_Texture("map/map4/8.png", Ren);
-	tex4 = Texture::Load_Texture("map/map4/14.png", Ren);
+	tex1 = Texture::Load_Texture("map/map2/1.png", Ren);
+	tex2 = Texture::Load_Texture("map/map2/2.png", Ren);
+	tex3 = Texture::Load_Texture("map/map2/11.png", Ren);
+	tex4 = Texture::Load_Texture("map/map2/7.png", Ren);
+	tex5 = Texture::Load_Texture("map/map2/3.png", Ren);
+	tex6 = Texture::Load_Texture("map/map2/10.png", Ren);
 
-	tex6 = Texture::Load_Texture("map/map4/19.png", Ren);
+	
+	
+	tex11 = Texture::Load_Texture("map/map2/8.png", Ren);
+	tex12 = Texture::Load_Texture("map/map2/9.png", Ren);
+	
 
-	tex8 = Texture::Load_Texture("map/map4/21.png", Ren);	
-	tex9 = Texture::Load_Texture("map/map4/3.png", Ren);
-	tex10 = Texture::Load_Texture("map/map4/6.png", Ren);
-	tex11 = Texture::Load_Texture("map/map4/9.png", Ren);
-	tex12 = Texture::Load_Texture("map/map4/15.png", Ren);
 	
-	tex14 = Texture::Load_Texture("map/map4/4.png", Ren);
-	tex15 = Texture::Load_Texture("map/map4/7.png", Ren);
-	tex16 = Texture::Load_Texture("map/map4/10.png", Ren);
-	
-	
-	tex17 = Texture::Load_Texture("map/map5/17.png", Ren);
-	tex18 = Texture::Load_Texture("map/map5/18.png", Ren);
-	tex19 = Texture::Load_Texture("map/map5/19.png", Ren);
-	tex20 = Texture::Load_Texture("map/map5/20.png", Ren);
-	tex21 = Texture::Load_Texture("map/map5/21.png", Ren);
-	tex22 = Texture::Load_Texture("map/map5/22.png", Ren);
-	tex23 = Texture::Load_Texture("map/map5/23.png", Ren);
-	tex24 = Texture::Load_Texture("map/map5/24.png", Ren);
-	tex25 = Texture::Load_Texture("map/map5/25.png", Ren);
-	tex26 = Texture::Load_Texture("map/map5/26.png", Ren);
-	tex27 = Texture::Load_Texture("map/map5/27.png", Ren);
-	tex30 = Texture::Load_Texture("map/map5/30.png", Ren);
-	tex31 = Texture::Load_Texture("map/map5/31.png", Ren);
-	tex32 = Texture::Load_Texture("map/map5/32.png", Ren);
-	tex33 = Texture::Load_Texture("map/map5/33.png", Ren);
-	tex34 = Texture::Load_Texture("map/map5/34.png", Ren);
-	tex35 = Texture::Load_Texture("map/map5/35.png", Ren);
-	tex36 = Texture::Load_Texture("map/map5/36.png", Ren);
-	tex37 = Texture::Load_Texture("map/map5/36.png", Ren);
-	tex38 = Texture::Load_Texture("map/map5/36.png", Ren);
-	tex39 = Texture::Load_Texture("map/map5/36.png", Ren);
-	tex40 = Texture::Load_Texture("map/map5/40.png", Ren);
-	tex41 = Texture::Load_Texture("map/map5/41.png", Ren);
-	tex42 = Texture::Load_Texture("map/map5/42.png", Ren);
-	tex45 = Texture::Load_Texture("map/map5/45.png", Ren);
-	tex47 = Texture::Load_Texture("map/map5/47.png", Ren);
-	tex48 = Texture::Load_Texture("map/map5/48.png", Ren);
-	tex49 = Texture::Load_Texture("map/map5/49.png", Ren);
-	tex50 = Texture::Load_Texture("map/map5/50.png", Ren);
-	tex51 = Texture::Load_Texture("map/map5/51.png", Ren);
-	tex54 = Texture::Load_Texture("map/map5/54.png", Ren);
-	tex55 = Texture::Load_Texture("map/map5/55.png", Ren);
-	tex56 = Texture::Load_Texture("map/map5/56.png", Ren);
+	tex17 = Texture::Load_Texture("map/map1/17.png", Ren);
+	tex18 = Texture::Load_Texture("map/map1/18.png", Ren);
+	tex19 = Texture::Load_Texture("map/map1/19.png", Ren);
+	tex20 = Texture::Load_Texture("map/map1/20.png", Ren);
+	tex21 = Texture::Load_Texture("map/map1/21.png", Ren);
+	tex22 = Texture::Load_Texture("map/map1/22.png", Ren);
+	tex23 = Texture::Load_Texture("map/map1/23.png", Ren);
+	tex24 = Texture::Load_Texture("map/map1/24.png", Ren);
+	tex25 = Texture::Load_Texture("map/map1/25.png", Ren);
+	tex26 = Texture::Load_Texture("map/map1/26.png", Ren);
+	tex27 = Texture::Load_Texture("map/map1/27.png", Ren);
+	tex30 = Texture::Load_Texture("map/map1/30.png", Ren);
+	tex31 = Texture::Load_Texture("map/map1/31.png", Ren);
+	tex32 = Texture::Load_Texture("map/map1/32.png", Ren);
+	tex33 = Texture::Load_Texture("map/map1/33.png", Ren);
+	tex34 = Texture::Load_Texture("map/map1/34.png", Ren);
+	tex35 = Texture::Load_Texture("map/map1/35.png", Ren);
+	tex36 = Texture::Load_Texture("map/map1/36.png", Ren);
+	tex37 = Texture::Load_Texture("map/map1/37.png", Ren);
+	tex38 = Texture::Load_Texture("map/map1/38.png", Ren);
+	tex39 = Texture::Load_Texture("map/map1/39.png", Ren);
+	tex40 = Texture::Load_Texture("map/map1/40.png", Ren);
+	tex41 = Texture::Load_Texture("map/map1/41.png", Ren);
+	tex42 = Texture::Load_Texture("map/map1/42.png", Ren);
+	tex45 = Texture::Load_Texture("map/map1/45.png", Ren);
+	tex47 = Texture::Load_Texture("map/map1/47.png", Ren);
+	tex48 = Texture::Load_Texture("map/map1/48.png", Ren);
+	tex49 = Texture::Load_Texture("map/map1/49.png", Ren);
+	tex50 = Texture::Load_Texture("map/map1/50.png", Ren);
+	tex51 = Texture::Load_Texture("map/map1/51.png", Ren);
+	tex54 = Texture::Load_Texture("map/map1/54.png", Ren);
+	tex55 = Texture::Load_Texture("map/map1/55.png", Ren);
+	tex56 = Texture::Load_Texture("map/map1/56.png", Ren);
 
 		
 }
@@ -111,6 +109,10 @@ void Map:: DrawMap(SDL_Renderer* Renderer)
 			case 4:
 				SDL_RenderCopy(Renderer, tex4, NULL, &dRect);
 				
+				break;
+			case 5:
+				SDL_RenderCopy(Renderer, tex5, NULL, &dRect);
+
 				break;
 			case 6:
 				SDL_RenderCopy(Renderer, tex6, NULL, &dRect);

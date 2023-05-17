@@ -4,8 +4,8 @@
 #include"Player.h"
 #include"Map.h"
 #include"Bullet.h"
-#include"Fall.h"
-#include"Menu.h"
+
+
 
 
 
@@ -35,8 +35,6 @@ Game::Game()
 	desRect.w =100;
 	desRect.h = 100;
 	
-
-	
 	
 };
 
@@ -45,7 +43,7 @@ Game::~Game()
 
 };
 
-void Game::Init(const char* name, int x_pos, int y_pos, int width, int height, bool fullsceen)
+void Game::Init(int id,const char* name, int x_pos, int y_pos, int width, int height, bool fullsceen)
 {
 	if (SDL_Init(SDL_INIT_EVENTS) < 0) {
 		std::cout << "init is error";
@@ -65,14 +63,12 @@ void Game::Init(const char* name, int x_pos, int y_pos, int width, int height, b
 		if (gRenderer) {
 			std::cout << "gRenderer is Success \n";
 			SDL_SetRenderDrawColor(gRenderer, 0, 255, 255, 0);
-			mRenderer = gRenderer;
+		
 		}
 		
 		
 		isRunning = true;		
-		background = Texture::Load_Texture("img/background1024x576.png", gRenderer);
-		map = new Map();
-		map->LoadMap(gRenderer);
+		
 		
 		player = new Player(gRenderer);
 		player2 = new Player(gRenderer);	
@@ -85,7 +81,7 @@ void Game::Init(const char* name, int x_pos, int y_pos, int width, int height, b
 		liveTex_bg = Texture::Load_TextureID(3, gRenderer);
 		liveTex_bg2 = Texture::Load_TextureID(4, gRenderer);
 
-		
+		type = START;
 
 		
 		
@@ -106,7 +102,7 @@ void Game::HandleEvent()
 {
 
 
-	while (SDL_PollEvent(&Game::event) != 0)
+	SDL_PollEvent(&event);
 	{
 		if (Game::event.type == SDL_QUIT)
 			isRunning = false;
@@ -136,15 +132,213 @@ void Game::HandleEvent()
 	}	
 	
 }
+bool Game::isMouseHovering(int mouseX, int mouseY, int textX, int textY, int textWidth, int textHeight) {
+	return (mouseX >= textX && mouseX <= (textX + textWidth) &&
+		mouseY >= textY && mouseY <= (textY + textHeight));
+}
 
+SDL_Texture* Game::tex(SDL_Renderer* Renderer, const char* name, int size, SDL_Color texColor)
+{
+	TTF_Font* Font = TTF_OpenFont("ttf/play.otf", size);
 
+	SDL_Surface* livessuaface = TTF_RenderText_Solid(Font, name, texColor);
+	SDL_Texture* livetex;
+	livetex = SDL_CreateTextureFromSurface(Renderer, livessuaface);
+	SDL_FreeSurface(livessuaface);
+	TTF_CloseFont(Font);
+	return livetex;
+}
+void Game::GameLose()
+{
+	if (player->live <= 0) {
+				
+				SDL_Texture* overTex = Texture::Load_Texture("img/waitbg/play2win.png", gRenderer);
+				SDL_Rect overRect = { 200,150,800,300 };
+				SDL_RenderCopy(gRenderer, overTex, NULL, &overRect);
+				SDL_RenderPresent(gRenderer);
+				
+				SDL_DestroyTexture(overTex);
+
+				if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_SPACE)
+				{
+					type = PLAY;
+					player->live = 3;
+					player2->live2 = 3;
+				}
+			}
+	else if (player2->live2<=0) {
+			
+				SDL_Texture* overTex2 = Texture::Load_Texture("img/waitbg/play1win.png", gRenderer);
+				SDL_Rect overRect2 = { 200,150,800,300 };
+				SDL_Rect wait = { 200,150,800,300 };
+				SDL_RenderCopy(gRenderer, overTex2, NULL, &overRect2);
+				SDL_RenderPresent(gRenderer);
+				SDL_DestroyTexture(overTex2);
+				if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_SPACE)
+				{
+					type = PLAY;
+					player->live = 3;
+					player2->live2 = 3;
+				}
+			}
+	
+}
+void Game::GameStart()
+{
+	  
+
+	bgnTex = Texture::Load_Texture("img/waitbg/waitbg.png", gRenderer);
+	if (!bgnTex) std::cout << 0;
+	playTex = tex(gRenderer, "Play", 28, playtexColor);
+	tutuTex = tex(gRenderer, "Tutorial", 35, tututexColor);
+	exitTex = tex(gRenderer, "EXIT", 28, exittexColor);
+	if (event.type == SDL_MOUSEBUTTONDOWN) {
+			if (event.button.button == SDL_BUTTON_LEFT) {
+				
+				SDL_GetMouseState(&mouseX, &mouseY);
+				// Xử lý sự kiện nhấn chuột trái
+				if (isMouseHovering(mouseX, mouseY, playRect.x, playRect.y, playRect.w, playRect.h))
+				{
+					
+					
+					type = MAP;
+					Mix_Chunk* playmix = Mix_LoadWAV("mix/play.mp3");
+					
+					Mix_PlayChannel(1, playmix, 0);
+					Mix_HaltMusic();
+				}
+				else if (isMouseHovering(mouseX, mouseY, tutuRect.x, tutuRect.y, tutuRect.w, tutuRect.h))
+				{
+					type = TUTORIAL;
+					Mix_Chunk* tutumix = Mix_LoadWAV("mix/foom_0.wav");
+					Mix_PlayChannel(1, tutumix, 0);
+					
+					
+				
+					
+				}
+				else if(isMouseHovering(mouseX, mouseY, exitRect.x, exitRect.y, exitRect.w, exitRect.h))
+				{
+					
+					SDL_Quit();
+				}
+			}
+		}
+		else if (event.type == SDL_MOUSEBUTTONUP) {
+			if (event.button.button == SDL_BUTTON_LEFT) {
+				SDL_GetMouseState(&mouseX, &mouseY);
+				// Xử lý sự kiện nhả chuột trái
+				
+			}
+		}
+		else if (event.type == SDL_MOUSEMOTION) {
+			SDL_GetMouseState(&mouseX, &mouseY);
+			if (isMouseHovering(mouseX, mouseY, playRect.x, playRect.y, playRect.w, playRect.h))
+			{
+				playtexColor = { 50,0,1 };
+				
+			}
+			else if (isMouseHovering(mouseX, mouseY,tutuRect.x, tutuRect.y, tutuRect.w,tutuRect.h))
+			{
+				tututexColor = { 50,0,1 };
+				
+			}
+			else if (isMouseHovering(mouseX, mouseY, exitRect.x, exitRect.y, exitRect.w, exitRect.h))
+			{
+				exittexColor = { 50,0,1 };
+
+			}
+			else
+			{
+				playtexColor = { 204,0,1 };
+				tututexColor = { 204,0,1 };
+				exittexColor = { 204,0,1 };
+			}
+		
+		}
+	
+	SDL_RenderCopy(gRenderer, bgnTex, NULL, NULL);
+	SDL_RenderCopy(gRenderer, playTex, NULL, &playRect);
+	SDL_RenderCopy(gRenderer, tutuTex, NULL, &tutuRect);
+	SDL_RenderCopy(gRenderer, exitTex, NULL, &exitRect);
+	SDL_RenderPresent(gRenderer);
+	SDL_DestroyTexture(bgnTex);
+	SDL_DestroyTexture(playTex);
+	SDL_DestroyTexture(tutuTex);
+	SDL_DestroyTexture(exitTex);
+	
+}
+void Game::gameTutorial()
+{
+			SDL_Texture* tuturial = Texture::Load_Texture("img/waitbg/tutu.png", gRenderer);
+			SDL_Texture* backTex = Texture::Load_Texture("img/waitbg/back.png", gRenderer);
+			SDL_Rect backRect = { 20,20,32,32 };
+			SDL_RenderCopy(gRenderer, tuturial, NULL, NULL);
+			SDL_RenderCopy(gRenderer, backTex, NULL,&backRect);
+			SDL_RenderPresent(gRenderer);
+			SDL_DestroyTexture(tuturial);
+			SDL_DestroyTexture(backTex);
+			
+			if (event.type == SDL_MOUSEBUTTONDOWN)
+							{	SDL_GetMouseState(&mouseX, &mouseY); 
+								if((isMouseHovering(mouseX, mouseY, backRect.x, backRect.y, backRect.w, backRect.h)))
+							type = START;
+							}
+}
+void Game::pause()
+{
+	SDL_Texture* a = Texture::Load_Texture("img/waitbg/back.png", gRenderer);
+	SDL_Rect aRect = { 616,328,32,32 };
+	SDL_RenderCopy(gRenderer, a, NULL, &aRect);
+	if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_SPACE)
+	{
+		SDL_RenderPresent(gRenderer);
+		SDL_DestroyTexture(a);
+		type = PLAY;
+	}
+}
+void Game::GamePlay()
+{
+
+}
+void Game::chooseMap()
+{
+	SDL_Texture* map1 = Texture::Load_Texture("1.png", gRenderer);
+	SDL_Rect desmap1 = { 0,0,1280,720 };
+	SDL_RenderCopy(gRenderer, map1, NULL, &desmap1);
+	SDL_RenderPresent(gRenderer);
+	SDL_DestroyTexture(map1);
+	if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_1)
+	{
+		mapstatus = 1;
+		type = PLAY;
+	}
+	else if(event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_2) {
+		mapstatus = 2;
+		type = PLAY;
+	}
+}
 void Game::Update()
 {
-	gamelive = player->live;
-	gamelive2 = player2->live2;
+	if (!background) {
+		background = Texture::Load_TextureID(mapstatus+10,gRenderer);
+	}
+	if (!map) {
+		map = new Map();
+		map->LoadMap(mapstatus, gRenderer);
+	}
+	if (player->live <= 0 || player2->live2 <= 0) {
+		type = EXIT;
+}
+	if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_SPACE)
+	{
+		type = PAUSE;
+	}
 	
+	
+
 	player->check();	
-	player->Update();
+	
 	player2->check2();
 
 	liveTex = player->livetex(28, gRenderer, player->live);
@@ -161,12 +355,12 @@ void Game::Update()
 	nowTime2 = SDL_GetTicks();
 	if (nowTime - lastTime > 5000 && player->bul <= 0)
 	{
-		player->bul = 25;
+		player->bul = 40;
 		lastTime = nowTime;
 	}
 	if (nowTime2 - lastTime2 > 5000 && player2->bul2 <= 0)
 	{
-		player2->bul2 = 25;
+		player2->bul2 = 40;
 		lastTime2 = nowTime2;
 	}
 	
@@ -191,9 +385,10 @@ void Game::Update()
 		bullets[i].Update();
 		if (SDL_HasIntersection(&player2->playerBox2, &bullets[i].getposbul))
 		{
+			player2->playerBox2.x += bullets[i].dir * val_lui;
 			bullets.erase(bullets.begin() + i);
-			player2->playerBox2.x += bullet.dir * val_lui;
-			std::cout << "cham" << std::endl;
+			
+			
 		}
 	}
 	
@@ -203,9 +398,10 @@ void Game::Update()
 			bullets2[i].Update();
 			if (SDL_HasIntersection(&player->playerBox, &bullets2[i].getposbul2))
 			{
+				player->playerBox.x += bullets2[i].dir * val_lui;
+
 				bullets2.erase(bullets2.begin() + i);
-				player->playerBox.x += bullet2.dir * val_lui;
-				std::cout << "cham2" << std::endl;
+				
 
 
 			}

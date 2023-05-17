@@ -27,6 +27,12 @@ SDL_Texture* Texture::Load_TextureID(int ID, SDL_Renderer* Renderer)
 	case 4:
 		texture = "img/live/2.png";
 		break;
+	case 11:
+		texture = "img/bg1.png";
+		break;
+	case 12:
+		texture = "img/bg2.png";
+		break;
 	}
 	SDL_Surface* tmpSurface = IMG_Load(texture);
 	SDL_Texture* tmpTex;
