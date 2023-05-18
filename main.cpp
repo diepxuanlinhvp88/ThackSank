@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
 	game = new Game();
 	
 	
-	game->Init(1,"thacksank", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Game::SCEEN_WIDTH, Game::SCEEN_HEIGHT, 1);
+	game->Init(1,"Wizard_war", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Game::SCEEN_WIDTH, Game::SCEEN_HEIGHT, 1);
 
 	
 	game->Mix();

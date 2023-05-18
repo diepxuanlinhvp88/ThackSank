@@ -4,7 +4,7 @@ class Player
 {
 public:
 	
-	double valgit = 2;
+	
 	Player(SDL_Renderer* Renderer);
 	~Player();
 	void CreateClip();
@@ -25,7 +25,7 @@ public:
 	float veloc_y = 0;
 	int veloc_x2 = 0;
 	int veloc_y2 = 0;
-	int val = 5;
+	int val = 10;
 	SDL_Rect playerBox;
 	SDL_Rect playerBox2;
 	SDL_Rect frame_clip[8];
@@ -41,15 +41,15 @@ public:
 	static int dir2;
 	int frame_attack;
 	int frame_attack2;
-	int jump_cnt = 3;
-	int jump_cnt2 = 3;
-	int max_jump = 2;
+	int jump_cnt = 2;
+	int jump_cnt2 = 2;
+	
 	bool onground;
 	bool onground2;
 	int live = 3;
 	int live2 = 3;
-	int bul = 25;
-	int bul2 = 25;
+	int bul = 40;
+	int bul2 = 40;
 	SDL_Texture* livetex(int size, SDL_Renderer* Ren,int live);
 	
 	
@@ -62,7 +62,7 @@ private:
 	int frame_width = 98;
 	int frame_height = 84;
 	int frame = 0;
-	int val_jump = 15;
+	int val_jump = 18;
 	
 
 	SDL_RendererFlip flips;

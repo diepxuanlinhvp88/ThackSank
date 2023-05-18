@@ -5,11 +5,6 @@
 #include"Map.h"
 #include"Bullet.h"
 
-
-
-
-
-
 SDL_Event Game::event;
 Player* player;
 Player* player2;
@@ -23,9 +18,6 @@ int Player::dir;
 int Player::dir2;
 std::vector<Game::Snow> Snows;
 Game::Snow snow;
-
-
-
 
 Game::Game()
 {
@@ -112,7 +104,7 @@ void Game::HandleEvent()
 			
 			if (player->attack && player->bul) {
 				bullet.xpos = player->playerBox.x;
-				bullet.ypos = player->playerBox.y;
+				bullet.ypos = player->playerBox.y-5;
 				bullet.dir = player->dir;
 				bullets.push_back(bullet);
 				
@@ -136,7 +128,6 @@ bool Game::isMouseHovering(int mouseX, int mouseY, int textX, int textY, int tex
 	return (mouseX >= textX && mouseX <= (textX + textWidth) &&
 		mouseY >= textY && mouseY <= (textY + textHeight));
 }
-
 SDL_Texture* Game::tex(SDL_Renderer* Renderer, const char* name, int size, SDL_Color texColor)
 {
 	TTF_Font* Font = TTF_OpenFont("ttf/play.otf", size);
@@ -154,6 +145,8 @@ void Game::GameLose()
 				
 				SDL_Texture* overTex = Texture::Load_Texture("img/waitbg/play2win.png", gRenderer);
 				SDL_Texture* again = Texture::Load_Texture("img/choilai.png", gRenderer);
+				SDL_Texture* menu = Texture::Load_Texture("img/menu.png", gRenderer);
+				SDL_Texture* exit = Texture::Load_Texture("img/exit.png", gRenderer);
 				SDL_Rect overRect = { 248,212,800,300 };
 				if (event.type == SDL_MOUSEBUTTONDOWN) {
 					if (event.button.button == SDL_BUTTON_LEFT) {
@@ -173,6 +166,22 @@ void Game::GameLose()
 							Mix_PlayChannel(1, playmix, 0);
 							Mix_HaltMusic();
 						}
+						else if (isMouseHovering(mouseX, mouseY, desmenu.x, desmenu.y, desmenu.w, desmenu.h))
+						{
+
+
+
+							type = START;
+							player->live = 3;
+							player2->live2 = 3;
+							Mix_Chunk* tutumix = Mix_LoadWAV("mix/foom_0.wav");
+							Mix_PlayChannel(1, tutumix, 0);
+							Mix_HaltMusic();
+						}
+						else if (isMouseHovering(mouseX, mouseY, desexit.x, desexit.y, desexit.w, desexit.h))
+						{
+							SDL_Quit();
+						}
 
 
 					}
@@ -184,28 +193,42 @@ void Game::GameLose()
 					{
 						desagain = { 620,400,53,53 };
 					}
+					else if (isMouseHovering(mouseX, mouseY, desmenu.x, desmenu.y, desmenu.w, desmenu.h))
+					{
+						desmenu= { 536,400,53,53 };
+					}
+					else if (isMouseHovering(mouseX, mouseY, desexit.x, desexit.y, desexit.w, desexit.h))
+					{
+						desexit = { 695,400,53,53 };
+					}
 
 					else
 					{
 						desagain = { 624,405,47,47 };
+						desmenu = { 540,405,47,47 };
+						desexit = { 700,405,47,47 };
 					}
 
 				}
 				SDL_RenderCopy(gRenderer, overTex, NULL, &overRect);
 				SDL_RenderCopy(gRenderer, again, NULL, &desagain);
-
+				SDL_RenderCopy(gRenderer, menu, NULL, &desmenu);
+				SDL_RenderCopy(gRenderer, exit, NULL, &desexit);
 				SDL_RenderPresent(gRenderer);
 				
 				SDL_DestroyTexture(overTex);
 				SDL_DestroyTexture(again);
-
+				SDL_DestroyTexture(menu);
+				SDL_DestroyTexture(exit);
 				
 			}
 	else if (player2->live2<=0) {
 			
 				SDL_Texture* overTex2 = Texture::Load_Texture("img/waitbg/play1win.png", gRenderer);
 				SDL_Texture* again = Texture::Load_Texture("img/choilai.png", gRenderer);
-				SDL_Rect overRect2 = { 200,150,800,300 };
+				SDL_Texture* menu = Texture::Load_Texture("img/menu.png", gRenderer);
+				SDL_Texture* exit = Texture::Load_Texture("img/exit.png", gRenderer);
+				SDL_Rect overRect2 = { 248,212,800,300 };
 		
 				if (event.type == SDL_MOUSEBUTTONDOWN) {
 					if (event.button.button == SDL_BUTTON_LEFT) {
@@ -225,6 +248,22 @@ void Game::GameLose()
 							Mix_PlayChannel(1, playmix, 0);
 							Mix_HaltMusic();
 						}
+						else if (isMouseHovering(mouseX, mouseY, desmenu.x, desmenu.y, desmenu.w, desmenu.h))
+						{
+
+
+
+							type = START;
+							player->live = 3;
+							player2->live2 = 3;
+							Mix_Chunk* tutumix = Mix_LoadWAV("mix/foom_0.wav");
+							Mix_PlayChannel(1, tutumix, 0);
+							Mix_HaltMusic();
+						}
+						else if (isMouseHovering(mouseX, mouseY, desexit.x, desexit.y, desexit.w, desexit.h))
+						{
+							SDL_Quit();
+						}
 
 
 					}
@@ -236,10 +275,20 @@ void Game::GameLose()
 					{
 						desagain = { 620,400,53,53 };
 					}
+					else if (isMouseHovering(mouseX, mouseY, desmenu.x, desmenu.y, desmenu.w, desmenu.h))
+					{
+						desmenu = { 536,400,53,53 };
+					}
+					else if (isMouseHovering(mouseX, mouseY, desexit.x, desexit.y, desexit.w, desexit.h))
+					{
+						desexit = { 695,400,53,53 };
+					}
 
 					else
 					{
 						desagain = { 624,405,47,47 };
+						desmenu = { 540,405,47,47 };
+						desexit = { 700,405,47,47 };
 					}
 
 				}
@@ -247,9 +296,13 @@ void Game::GameLose()
 
 			
 				SDL_RenderCopy(gRenderer, again, NULL, &desagain);
+				SDL_RenderCopy(gRenderer, menu, NULL, &desmenu);
+				SDL_RenderCopy(gRenderer, exit, NULL, &desexit);
 				SDL_RenderPresent(gRenderer);
 				SDL_DestroyTexture(overTex2);
 				SDL_DestroyTexture(again);
+				SDL_DestroyTexture(menu);
+				SDL_DestroyTexture(exit);
 			}
 	
 }
@@ -387,7 +440,7 @@ void Game::GamePlay()
 void Game::chooseMap()
 {
 	
-	SDL_Texture* bg = Texture::Load_Texture("img/4plus.png", gRenderer);
+	SDL_Texture* bg = Texture::Load_Texture("img/1.jpg", gRenderer);
 	SDL_RenderCopy(gRenderer, bg, NULL, NULL);
 	SDL_Texture* map1 = Texture::Load_Texture("img/map1.png", gRenderer);
 
@@ -430,13 +483,7 @@ void Game::chooseMap()
 			
 		}
 	}
-	else if (event.type == SDL_MOUSEBUTTONUP) {
-		if (event.button.button == SDL_BUTTON_LEFT) {
-			SDL_GetMouseState(&mouseX, &mouseY);
-			// Xử lý sự kiện nhả chuột trái
-
-		}
-	}
+	
 	else if (event.type == SDL_MOUSEMOTION) {
 		SDL_GetMouseState(&mouseX, &mouseY);
 		if (isMouseHovering(mouseX, mouseY, desmap1.x, desmap1.y, desmap1.w, desmap1.h))
@@ -555,7 +602,6 @@ void Game::Update()
 			}
 		}	
 }
-
 void Game::render()
 {
 	SDL_RenderClear(gRenderer);
@@ -597,7 +643,6 @@ void Game::render()
 		SDL_RenderPresent(gRenderer);
 
 }
-
 
 void Game::close()
 {

@@ -24,6 +24,7 @@
     <ProjectGuid>{f3bda8e9-fbf9-47dc-bf0f-154b341d7b52}</ProjectGuid>
     <RootNamespace>contra</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Wizard War</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

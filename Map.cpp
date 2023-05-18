@@ -17,11 +17,9 @@ Map::Map()
 
 	
 }
-
 Map::~Map()
 {
 }
-
 void Map::LoadMap(int ID,SDL_Renderer* Ren)
 {
 	
@@ -252,51 +250,53 @@ void Map:: DrawMap(SDL_Renderer* Renderer)
 			
 		}
 }
-
 void Map::CloseMap()
 {
-	SDL_DestroyTexture(tex1);
-	SDL_DestroyTexture(tex2);
-	SDL_DestroyTexture(tex3);
-	SDL_DestroyTexture(tex4);
-	SDL_DestroyTexture(tex6);
-	SDL_DestroyTexture(tex8);
-	SDL_DestroyTexture(tex9);
-	SDL_DestroyTexture(tex10);
-	SDL_DestroyTexture(tex11);
-	SDL_DestroyTexture(tex12);
-	SDL_DestroyTexture(tex14);
-	SDL_DestroyTexture(tex15);
-	SDL_DestroyTexture(tex16);
-
-	SDL_DestroyTexture(tex17);
-	SDL_DestroyTexture(tex18);
-	SDL_DestroyTexture(tex20);
-	SDL_DestroyTexture(tex21);
-	SDL_DestroyTexture(tex22);
-	SDL_DestroyTexture(tex23);
-	SDL_DestroyTexture(tex24);
-	SDL_DestroyTexture(tex25);
-	SDL_DestroyTexture(tex26);
-	SDL_DestroyTexture(tex27);
-	SDL_DestroyTexture(tex30);
-	SDL_DestroyTexture(tex31);
-	SDL_DestroyTexture(tex32);
-	SDL_DestroyTexture(tex33);
-	SDL_DestroyTexture(tex34);
-	SDL_DestroyTexture(tex35);
-	SDL_DestroyTexture(tex36);
-	SDL_DestroyTexture(tex40);
-	SDL_DestroyTexture(tex41);
-	SDL_DestroyTexture(tex42);
-	SDL_DestroyTexture(tex45);
-	SDL_DestroyTexture(tex47);
-	SDL_DestroyTexture(tex48);
-	SDL_DestroyTexture(tex49);
-	SDL_DestroyTexture(tex50);
-	SDL_DestroyTexture(tex51);
-	SDL_DestroyTexture(tex54);
-	SDL_DestroyTexture(tex55);
-	SDL_DestroyTexture(tex56);
+	if (tex1) {
+		SDL_DestroyTexture(tex1);
+		SDL_DestroyTexture(tex2);
+		SDL_DestroyTexture(tex3);
+		SDL_DestroyTexture(tex4);
+		SDL_DestroyTexture(tex5);
+		SDL_DestroyTexture(tex6);
+		SDL_DestroyTexture(tex11);
+		SDL_DestroyTexture(tex12);
+		
+	}
+	if (tex17) {
+		SDL_DestroyTexture(tex17);
+		SDL_DestroyTexture(tex18);
+		SDL_DestroyTexture(tex19);
+		SDL_DestroyTexture(tex20);
+		SDL_DestroyTexture(tex21);
+		SDL_DestroyTexture(tex22);
+		SDL_DestroyTexture(tex23);
+		SDL_DestroyTexture(tex24);
+		SDL_DestroyTexture(tex25);
+		SDL_DestroyTexture(tex26);
+		SDL_DestroyTexture(tex27);
+		SDL_DestroyTexture(tex30);
+		SDL_DestroyTexture(tex31);
+		SDL_DestroyTexture(tex32);
+		SDL_DestroyTexture(tex33);
+		SDL_DestroyTexture(tex34);
+		SDL_DestroyTexture(tex35);
+		SDL_DestroyTexture(tex36);
+		SDL_DestroyTexture(tex37);
+		SDL_DestroyTexture(tex38);
+		SDL_DestroyTexture(tex39);
+		SDL_DestroyTexture(tex40);
+		SDL_DestroyTexture(tex41);
+		SDL_DestroyTexture(tex42);
+		SDL_DestroyTexture(tex45);
+		SDL_DestroyTexture(tex47);
+		SDL_DestroyTexture(tex48);
+		SDL_DestroyTexture(tex49);
+		SDL_DestroyTexture(tex50);
+		SDL_DestroyTexture(tex51);
+		SDL_DestroyTexture(tex54);
+		SDL_DestroyTexture(tex55);
+		SDL_DestroyTexture(tex56);
+	}
 
 }

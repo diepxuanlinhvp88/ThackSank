@@ -41,9 +41,4 @@ SDL_Texture* Texture::Load_TextureID(int ID, SDL_Renderer* Renderer)
 	return tmpTex;
 
 }
-//SDL_Texture* Texture::Live_Texture(SDL_Renderer* Renderer,const char* font, int lives, int size)
-//{
-//	
-//	
-//}
 

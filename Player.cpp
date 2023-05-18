@@ -6,13 +6,9 @@
 #include"Map.h"
 #include"Bullet.h"
 
-
 int speed = 1;
-
 int scale = 5;
 int scale2 = 3;
-
-
 
 
 
@@ -53,7 +49,7 @@ Player::Player(SDL_Renderer* Renderer)
 	playerJump2 = Texture::Load_Texture("img/player/playerJump2.png", Renderer);
 	playerAttack2 = Texture::Load_Texture("img/player/playerAttack2.png", Renderer);
 	
-	playerBox2.x = Game::SCEEN_WIDTH - 350;
+	playerBox2.x = Game::SCEEN_WIDTH - 500;
 	playerBox2.y = 96;
 	playerBox2.w = 80;
 	
@@ -64,11 +60,9 @@ Player::Player(SDL_Renderer* Renderer)
 
 
 }
-
 Player::~Player()
 {
 }
-
 void Player::CreateClip()
 {
 	for (int i = 0; i < 8; i++)
@@ -180,7 +174,6 @@ bool Player::toMap(SDL_Rect playerbox)
 	}
 	return false;
 }
-
 void Player::move()
 {
 	
@@ -243,10 +236,6 @@ void Player::move()
 		
 	}
 }
-
-
-
-
 void Player::move_2()
 {
 	if (Game::event.type == SDL_KEYDOWN && Game::event.key.repeat ==0)
@@ -303,9 +292,6 @@ void Player::move_2()
 	}
 }
 
-
-
-
 void Player::check()
 {
 
@@ -329,9 +315,18 @@ void Player::check()
 	{
 		playerBox.y -= veloc_y;
 		veloc_y = 0;
-		jump_cnt = 3;
+		
 	}
-	
+	SDL_Rect playerBoxtop = {
+		playerBox.x + playerBox.w / 4, playerBox.y + playerBox.h - 1,
+		playerBox.w / 2,
+		2
+
+	};
+	if (toMap(playerBoxtop))
+	{		
+		jump_cnt = 2;
+	}
 
 	
 	if (playerBox.y > Game::SCEEN_HEIGHT + 10) {
@@ -392,14 +387,24 @@ void Player::check2()
 	{
 		playerBox2.y -= veloc_y2;
 		veloc_y2 = 0;
-		jump_cnt2 = 3;
+		
+	}
+	SDL_Rect playerBoxtop2 = {
+		playerBox2.x + playerBox2.w / 4, playerBox2.y + playerBox2.h - 1,
+		playerBox2.w / 2,
+		2
+
+	};
+	if (toMap(playerBoxtop2))
+	{
+		jump_cnt2 = 2;
 	}
 	
 	if (playerBox2.y > Game::SCEEN_HEIGHT + 10) {
 		playerBox2.y = -playerBox2.h;
 		playerBox2.x = 605;
 		live2--;
-		
+		veloc_y2 = 0;
 	}
 
 	if (veloc_x2 < 0) {
@@ -437,7 +442,6 @@ void Player::check2()
 	}
 
 }
-
 
 void Player::Render()
 {
@@ -483,7 +487,6 @@ void Player::Render()
 	
 
 }
-
 void Player::Render2()
 {
 	
@@ -527,7 +530,6 @@ void Player::Render2()
 	
 
 }
-
 void Player::Clean()
 {
 

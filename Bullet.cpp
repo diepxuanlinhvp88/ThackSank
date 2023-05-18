@@ -43,9 +43,9 @@ void Bullet::Update()
 	bul.x = xpos ;
 	getposbul.x = bul.x +5;
 	getposbul2.x = bul.x +10;
-	bul.y = ypos + 3;
+	bul.y = ypos + 25;
 	getposbul.y = bul.y;
-	getposbul2.y = bul.y  + 15;
+	getposbul2.y = bul.y  + 30;
 	
 }
 bool Bullet::attack(int x, int y)

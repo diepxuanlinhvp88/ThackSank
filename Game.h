@@ -62,7 +62,7 @@ public:
 	Uint32 nowTime2 = 0;
 	SDL_Rect srcRect;
 	SDL_Rect desRect;
-	int val_lui = 30;
+	int val_lui = 50;
 	static SDL_Event event;
 
 
@@ -90,10 +90,12 @@ public:
 	SDL_Texture* tex(SDL_Renderer* Renderer, const char* name, int size, SDL_Color texColor);
 
 
-	int mapstatus = 2;
+	int mapstatus;
 	SDL_Rect desmap1 = { 189,261,419,202 };
 	SDL_Rect desmap2 = { 742,261,389,202 };
 	SDL_Rect desagain = { 624,405,47,47 };
+	SDL_Rect desmenu = { 540,405,47,47 };
+	SDL_Rect desexit = { 700,405,47,47 };
 private:
 	std::string path;
 	bool isRunning;

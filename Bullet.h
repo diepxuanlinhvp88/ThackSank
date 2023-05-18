@@ -9,7 +9,7 @@ public:
 	Bullet();
 	~Bullet();
 	int xpos, ypos;
-	int speed = 20;
+	int speed = 30;
 	SDL_Rect bul;
 	SDL_Rect getposbul;
 	SDL_Rect getposbul2;
