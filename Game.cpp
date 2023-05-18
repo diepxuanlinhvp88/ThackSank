@@ -310,7 +310,7 @@ void Game::GameStart()
 {
 	  
 
-	bgnTex = Texture::Load_Texture("img/waitbg/waitbg.png", gRenderer);
+	bgnTex = Texture::Load_Texture("img/waitbg/waitbg2.png", gRenderer);
 	if (!bgnTex) std::cout << 0;
 	playTex = tex(gRenderer, "Play", 28, playtexColor);
 	tutuTex = tex(gRenderer, "Tutorial", 35, tututexColor);

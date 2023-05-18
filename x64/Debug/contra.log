@@ -1,7 +1,4 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (contra.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Player.cpp
-D:\visua\thacksank\contra\Player.cpp(18,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\visua\thacksank\contra\Player.cpp(196,15): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\visua\thacksank\contra\Player.cpp(313,24): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-D:\visua\thacksank\contra\Player.cpp(316,25): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+  Game.cpp
+D:\visua\thacksank\contra\Game.cpp(24,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   contra.vcxproj -> D:\visua\thacksank\contra\x64\Debug\Wizard War.exe
