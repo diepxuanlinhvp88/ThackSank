@@ -91,7 +91,9 @@ public:
 
 
 	int mapstatus = 2;
-
+	SDL_Rect desmap1 = { 189,261,419,202 };
+	SDL_Rect desmap2 = { 742,261,389,202 };
+	SDL_Rect desagain = { 624,405,47,47 };
 private:
 	std::string path;
 	bool isRunning;

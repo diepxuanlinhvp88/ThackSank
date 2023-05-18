@@ -29,6 +29,7 @@ int main(int argc, char* argv[]) {
 		else if (game->type == PLAY) 
 		{
 			game->HandleEvent();
+			game->GamePlay();
 		
 			game->Update();
 			game->render();

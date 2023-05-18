@@ -153,33 +153,103 @@ void Game::GameLose()
 	if (player->live <= 0) {
 				
 				SDL_Texture* overTex = Texture::Load_Texture("img/waitbg/play2win.png", gRenderer);
-				SDL_Rect overRect = { 200,150,800,300 };
+				SDL_Texture* again = Texture::Load_Texture("img/choilai.png", gRenderer);
+				SDL_Rect overRect = { 248,212,800,300 };
+				if (event.type == SDL_MOUSEBUTTONDOWN) {
+					if (event.button.button == SDL_BUTTON_LEFT) {
+
+						SDL_GetMouseState(&mouseX, &mouseY);
+						// Xử lý sự kiện nhấn chuột trái
+						if (isMouseHovering(mouseX, mouseY, desagain.x, desagain.y, desagain.w, desagain.h))
+						{
+
+
+
+							type = PLAY;
+							player->live = 3;
+							player2->live2 = 3;
+							Mix_Chunk* playmix = Mix_LoadWAV("mix/play.mp3");
+
+							Mix_PlayChannel(1, playmix, 0);
+							Mix_HaltMusic();
+						}
+
+
+					}
+				}
+
+				else if (event.type == SDL_MOUSEMOTION) {
+					SDL_GetMouseState(&mouseX, &mouseY);
+					if (isMouseHovering(mouseX, mouseY, desagain.x, desagain.y, desagain.w, desagain.h))
+					{
+						desagain = { 620,400,53,53 };
+					}
+
+					else
+					{
+						desagain = { 624,405,47,47 };
+					}
+
+				}
 				SDL_RenderCopy(gRenderer, overTex, NULL, &overRect);
+				SDL_RenderCopy(gRenderer, again, NULL, &desagain);
+
 				SDL_RenderPresent(gRenderer);
 				
 				SDL_DestroyTexture(overTex);
+				SDL_DestroyTexture(again);
 
-				if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_SPACE)
-				{
-					type = PLAY;
-					player->live = 3;
-					player2->live2 = 3;
-				}
+				
 			}
 	else if (player2->live2<=0) {
 			
 				SDL_Texture* overTex2 = Texture::Load_Texture("img/waitbg/play1win.png", gRenderer);
+				SDL_Texture* again = Texture::Load_Texture("img/choilai.png", gRenderer);
 				SDL_Rect overRect2 = { 200,150,800,300 };
-				SDL_Rect wait = { 200,150,800,300 };
+		
+				if (event.type == SDL_MOUSEBUTTONDOWN) {
+					if (event.button.button == SDL_BUTTON_LEFT) {
+
+						SDL_GetMouseState(&mouseX, &mouseY);
+						// Xử lý sự kiện nhấn chuột trái
+						if (isMouseHovering(mouseX, mouseY, desagain.x, desagain.y, desagain.w, desagain.h))
+						{
+
+
+
+							type = PLAY;
+							player->live = 3;
+							player2->live2 = 3;
+							Mix_Chunk* playmix = Mix_LoadWAV("mix/play.mp3");
+
+							Mix_PlayChannel(1, playmix, 0);
+							Mix_HaltMusic();
+						}
+
+
+					}
+				}
+
+				else if (event.type == SDL_MOUSEMOTION) {
+					SDL_GetMouseState(&mouseX, &mouseY);
+					if (isMouseHovering(mouseX, mouseY, desagain.x, desagain.y, desagain.w, desagain.h))
+					{
+						desagain = { 620,400,53,53 };
+					}
+
+					else
+					{
+						desagain = { 624,405,47,47 };
+					}
+
+				}
 				SDL_RenderCopy(gRenderer, overTex2, NULL, &overRect2);
+
+			
+				SDL_RenderCopy(gRenderer, again, NULL, &desagain);
 				SDL_RenderPresent(gRenderer);
 				SDL_DestroyTexture(overTex2);
-				if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_SPACE)
-				{
-					type = PLAY;
-					player->live = 3;
-					player2->live2 = 3;
-				}
+				SDL_DestroyTexture(again);
 			}
 	
 }
@@ -271,7 +341,7 @@ void Game::GameStart()
 void Game::gameTutorial()
 {
 			SDL_Texture* tuturial = Texture::Load_Texture("img/waitbg/tutu.png", gRenderer);
-			SDL_Texture* backTex = Texture::Load_Texture("img/waitbg/back.png", gRenderer);
+			SDL_Texture* backTex = Texture::Load_Texture("img/waitbg/menu.png", gRenderer);
 			SDL_Rect backRect = { 20,20,32,32 };
 			SDL_RenderCopy(gRenderer, tuturial, NULL, NULL);
 			SDL_RenderCopy(gRenderer, backTex, NULL,&backRect);
@@ -287,36 +357,111 @@ void Game::gameTutorial()
 }
 void Game::pause()
 {
-	SDL_Texture* a = Texture::Load_Texture("img/waitbg/back.png", gRenderer);
-	SDL_Rect aRect = { 616,328,32,32 };
+	SDL_Texture* a = Texture::Load_Texture("img/waitbg/pause.png", gRenderer);
+	SDL_Rect aRect = { 616,10,32,32 };
 	SDL_RenderCopy(gRenderer, a, NULL, &aRect);
 	if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_SPACE)
 	{
-		SDL_RenderPresent(gRenderer);
-		SDL_DestroyTexture(a);
 		type = PLAY;
 	}
+
+	SDL_RenderPresent(gRenderer);
+	SDL_DestroyTexture(a);
 }
 void Game::GamePlay()
 {
+	
+	if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_SPACE)
+	{
+		SDL_Texture* a = Texture::Load_Texture("img/waitbg/pause.png", gRenderer);
+		SDL_Rect aRect = { 616,10,32,32 };
+		SDL_RenderCopy(gRenderer, a, NULL, &aRect);
+		SDL_RenderPresent(gRenderer);
+		SDL_DestroyTexture(a);
+		type = PAUSE;
+	}
+	
+	
 
 }
 void Game::chooseMap()
 {
-	SDL_Texture* map1 = Texture::Load_Texture("1.png", gRenderer);
-	SDL_Rect desmap1 = { 0,0,1280,720 };
+	
+	SDL_Texture* bg = Texture::Load_Texture("img/4plus.png", gRenderer);
+	SDL_RenderCopy(gRenderer, bg, NULL, NULL);
+	SDL_Texture* map1 = Texture::Load_Texture("img/map1.png", gRenderer);
+
+	
+	SDL_Texture* map2 = Texture::Load_Texture("img/map2.png", gRenderer);
+	
+	
+	
+	
+	if (event.type == SDL_MOUSEBUTTONDOWN) {
+		if (event.button.button == SDL_BUTTON_LEFT) {
+
+			SDL_GetMouseState(&mouseX, &mouseY);
+			// Xử lý sự kiện nhấn chuột trái
+			if (isMouseHovering(mouseX, mouseY, desmap1.x, desmap1.y, desmap1.w, desmap1.h))
+			{
+
+
+
+				mapstatus = 1;
+				type = PLAY;
+				Mix_Chunk* playmix = Mix_LoadWAV("mix/play.mp3");
+
+				Mix_PlayChannel(1, playmix, 0);
+				Mix_HaltMusic();
+			}
+			else if (isMouseHovering(mouseX, mouseY, desmap2.x, desmap2.y, desmap2.w, desmap2.h))
+			{
+				mapstatus = 2;
+				type = PLAY;
+				Mix_Chunk* playmix = Mix_LoadWAV("mix/play.mp3");
+
+				Mix_PlayChannel(1, playmix, 0);
+				Mix_HaltMusic();
+
+
+
+
+			}
+			
+		}
+	}
+	else if (event.type == SDL_MOUSEBUTTONUP) {
+		if (event.button.button == SDL_BUTTON_LEFT) {
+			SDL_GetMouseState(&mouseX, &mouseY);
+			// Xử lý sự kiện nhả chuột trái
+
+		}
+	}
+	else if (event.type == SDL_MOUSEMOTION) {
+		SDL_GetMouseState(&mouseX, &mouseY);
+		if (isMouseHovering(mouseX, mouseY, desmap1.x, desmap1.y, desmap1.w, desmap1.h))
+		{
+			 desmap1 = { 169,250,550,300 };
+			
+		}
+		else if (isMouseHovering(mouseX, mouseY, desmap2.x, desmap2.y, desmap2.w, desmap2.h))
+		{
+			 desmap2 = { 720,250,550,300 };
+
+		}
+		
+		else
+		{	desmap1 = { 189,261,419,202 };
+			 desmap2 = { 742,261,389,202 };
+		}
+
+	}
 	SDL_RenderCopy(gRenderer, map1, NULL, &desmap1);
+	SDL_RenderCopy(gRenderer, map2, NULL, &desmap2);
 	SDL_RenderPresent(gRenderer);
 	SDL_DestroyTexture(map1);
-	if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_1)
-	{
-		mapstatus = 1;
-		type = PLAY;
-	}
-	else if(event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_2) {
-		mapstatus = 2;
-		type = PLAY;
-	}
+	SDL_DestroyTexture(map2);
+	SDL_DestroyTexture(bg);
 }
 void Game::Update()
 {
@@ -330,10 +475,7 @@ void Game::Update()
 	if (player->live <= 0 || player2->live2 <= 0) {
 		type = EXIT;
 }
-	if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_SPACE)
-	{
-		type = PAUSE;
-	}
+	
 	
 	
 
@@ -345,11 +487,17 @@ void Game::Update()
 	liveTex2 = player->livetex(28, gRenderer, player2->live2);
 	if (player->attack && player->bul) {
 		player->bul--;
-	
+		Mix_Chunk* gun = Mix_LoadWAV("mix/gun.mp3");
+
+		Mix_PlayChannel(1, gun, 0);
+		Mix_HaltMusic();
 	}
 	if (player2->attack2 && player2->bul2) {
 		player2->bul2--;
+		Mix_Chunk* gun = Mix_LoadWAV("mix/gun.mp3");
 
+		Mix_PlayChannel(1, gun, 0);
+		Mix_HaltMusic();
 	}
 	nowTime = SDL_GetTicks();
 	nowTime2 = SDL_GetTicks();
