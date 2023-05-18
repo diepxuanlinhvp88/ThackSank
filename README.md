@@ -19,7 +19,8 @@ Game được viết bằng ngôn ngữ C++ sử dụng thư viện đồ họa 
 * với player 1 sử dụng các phím ![2](https://github.com/diepxuanlinhvp88/ThackSank/assets/124590159/f0f6692e-7ee3-4321-b14f-8fea0ce236c2) ![a](https://github.com/diepxuanlinhvp88/ThackSank/assets/124590159/5c0d2842-6d36-47e6-97ac-de84fb2baaf8) ![d](https://github.com/diepxuanlinhvp88/ThackSank/assets/124590159/c384fecf-cf3c-4f6f-b319-faadc150bdab) để di chuyển, phím ![b](https://github.com/diepxuanlinhvp88/ThackSank/assets/124590159/d029fa10-0496-439a-8729-bc73de206131) để bắn.
 * với player 2 sử dụng các phím ![l](https://github.com/diepxuanlinhvp88/ThackSank/assets/124590159/4850fbf9-a4da-49be-849d-0d1fae7eb5ab) ![u](https://github.com/diepxuanlinhvp88/ThackSank/assets/124590159/3b0a13ee-ff47-4529-baef-059eb9a1b22e)
 ![r](https://github.com/diepxuanlinhvp88/ThackSank/assets/124590159/6626ac4e-80c5-42ff-8837-ca37d7e4cf60) để di chuyển  ![p](https://github.com/diepxuanlinhvp88/ThackSank/assets/124590159/2082e39a-636c-49a0-9704-95ec940ab28d) để bắn.  
-* Trong lúc chơi người chơi có thể nhấn phím Space để dừng game và Space để tiếp tục.
+* Trong lúc chơi người chơi có thể nhấn phím Space để dừng game và Space để tiếp tục. ![Untitled](https://github.com/diepxuanlinhvp88/ThackSank/assets/124590159/d8e0d744-0c73-473d-9160-2f2955b03e3c)
+* Nếu hết đạn, người chơi phải đợi thời gian nạp đạn
 * Nếu bắn trúng, kẻ địch sẽ bị lùi lại, và người chơi phải làm kẻ địch rơi khỏi map để thắng. Nếu rơi quá 3 mạng , người chơi sẽ thua ![over](https://github.com/diepxuanlinhvp88/ThackSank/assets/124590159/63f79689-7630-440d-9972-8def6cf5be77)
 * Khi chết người chơi có thể lựa chọn quay về trang đầu hoặc chơi lại hoặc thoát game.
 # Các kĩ thuật lập trình đã sử dụng  
