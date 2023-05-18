@@ -1,10 +1,12 @@
 # "Wizrad WAR"
 __Introduce myself__  
 Full name: Diệp Xuân Linh - 22021193  
-Class K67CC - University of Engineering and Technology
+Class K67CC - University of Engineering and Technology  
+***  
 # Welcome to my game!  
 Game được viết bằng ngôn ngữ C++ sử dụng thư viện đồ họa SDL2.0 và được lập trình trên Visual Studio Code.  
 "Wizrad WAR" là game đối kháng 1 vs 1, trong đó bạn sẽ nhập vai vào 1 trong 2 pháp sư và tiêu diệt tên pháp sư còn lại bằng phép thuật có trong tay của mình.  
+***  
 # Cài Đặt  
 * Bước 1: Tải xuống mã nguồn trò chơi từ kho lưu trữ GitHub chính thức.  
 * Bước 2: Giải nén tệp ZIP.
@@ -31,6 +33,7 @@ Game được viết bằng ngôn ngữ C++ sử dụng thư viện đồ họa 
 # Nguồn Tham Khảo  
 * __Sự giảng dạy của các Thầy Trần Quốc Long, Thầy Tạ Việt Cường, Thầy Lê Bằng Giang.__
 * Tham khảo các web như https://lazyfoo.net/tutorials/SDL/ và https://www.youtube.com/ .
+* Tham khảo được khá nhiều từ ChatGpt.
 * Hình ảnh và âm thanh được tham khảo từ nhiều nguồn khác nhau và được chỉnh sửa để phù hợp với game như: https://itch.io  
 ***  
 # Bài học  
